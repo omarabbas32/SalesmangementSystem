@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "name": "رجالي",
+    "price_per_kg": 175,
+    "current_stock_grams": 6500,
+    "created_at": "2025-10-10T14:52:54.766Z",
+    "updated_at": "2025-10-10T15:02:41.668Z"
+  }
+]
