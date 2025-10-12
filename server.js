@@ -1,4 +1,6 @@
-// server.js
+require('dotenv').config();
+console.log("✅ MONGODB_URI:", process.env.MONGODB_URI);
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -6,7 +8,7 @@ const bodyParser = require('body-parser');
 const jsonStorage = require('./src/storage/jsonStorage');
 const mongoBackup = require('./src/storage/mongoBackup');
 
-
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const apiRoutes = require('./src/routes');
 
 const app = express();

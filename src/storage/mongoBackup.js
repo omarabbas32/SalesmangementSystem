@@ -4,6 +4,7 @@ class MongoBackup {
   constructor() {
     this.isConnected = false;
     this.connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/salesManagement';
+    console.log("MONGODB_URI:", process.env.MONGODB_URI);
     this.connectionTimeout = 5000; // 5 seconds timeout
   }
 
@@ -137,6 +138,7 @@ class MongoBackup {
       // رفع المنتجات
       const products = await jsonStorage.getAll('products.json');
       if (products.length > 0) {
+        
         await Product.insertMany(products.map(p => ({
           id: p.id,
           name: p.name,

@@ -1,0 +1,58 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "رجالي",
+      "price_per_kg": 175,
+      "current_stock_grams": 6500,
+      "created_at": "2025-10-10T14:52:54.766Z",
+      "updated_at": "2025-10-10T15:02:41.668Z"
+    },
+    {
+      "name": "رجالي",
+      "price_per_kg": 1500.5,
+      "current_stock_grams": 5000,
+      "id": 2,
+      "createdAt": "2025-10-10T18:47:34.183Z",
+      "updatedAt": "2025-10-10T18:47:34.183Z"
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "weight_grams": 500,
+      "price_per_kg": 175,
+      "total_amount": 87.5,
+      "sale_date": "2025-10-10T15:02:41.665Z"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "description": "فاتورة كهرباء",
+      "amount": 250.75,
+      "category": "مرافق",
+      "expense_date": "2025-10-10T15:06:50.787Z"
+    }
+  ],
+  "inventory_adjustments": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "weight_grams": 2000,
+      "adjustment_type": "add",
+      "reason": "إضافة مخزون جديد",
+      "adjustment_date": "2025-10-10T15:59:48.267Z"
+    },
+    {
+      "id": 2,
+      "product_id": 1,
+      "weight_grams": 500,
+      "adjustment_type": "remove",
+      "reason": "بيع - فاتورة رقم 1",
+      "adjustment_date": "2025-10-10T15:59:48.267Z"
+    }
+  ],
+  "backupDate": "2025-10-12T11:11:56.452Z"
+}
