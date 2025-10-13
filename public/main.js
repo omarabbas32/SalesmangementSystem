@@ -1,5 +1,5 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://salesmangementsystem-production.up.railway.app/api';
 
 // Debug function to log API calls
 function logApiCall(endpoint, options = {}) {
