@@ -59,5 +59,14 @@
     "id": 7,
     "createdAt": "2025-10-12T14:24:22.841Z",
     "updatedAt": "2025-10-12T14:24:22.841Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "adjustment_type": "remove",
+    "reason": "بيع - فاتورة رقم 5",
+    "id": 8,
+    "createdAt": "2025-10-13T19:45:22.453Z",
+    "updatedAt": "2025-10-13T19:45:22.453Z"
   }
 ]

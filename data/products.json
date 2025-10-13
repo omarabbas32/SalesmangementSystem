@@ -11,10 +11,10 @@
   {
     "name": "رجالي",
     "price_per_kg": 1500.5,
-    "current_stock_grams": 5000,
+    "current_stock_grams": 4900,
     "id": 2,
     "createdAt": "2025-10-10T18:47:34.183Z",
-    "updatedAt": "2025-10-10T18:47:34.183Z"
+    "updatedAt": "2025-10-13T19:45:22.448Z"
   },
   {
     "name": "منتج جديد",

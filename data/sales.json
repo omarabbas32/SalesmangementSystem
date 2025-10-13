@@ -36,5 +36,15 @@
     "id": 4,
     "createdAt": "2025-10-12T14:24:22.836Z",
     "updatedAt": "2025-10-12T14:24:22.836Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "price_per_kg": 1500.5,
+    "total_amount": 150.05,
+    "sale_date": "2025-10-13T19:45:22.436Z",
+    "id": 5,
+    "createdAt": "2025-10-13T19:45:22.438Z",
+    "updatedAt": "2025-10-13T19:45:22.438Z"
   }
 ]
