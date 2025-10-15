@@ -1,5 +1,5 @@
-// API Configuration ---productiooooooooooooooooooooooooon 
-const API_BASE_URL = 'http://localhost:3000/api'; // غيّر هذا إلى عنوان الخادم الخاص بك
+
+const API_BASE_URL = 'http://localhost:3000/api';
 
 // Debug function to log API calls
 function logApiCall(endpoint, options = {}) {
@@ -64,9 +64,12 @@ async function apiCall(endpoint, options = {}) {
     // Log the API call for debugging
     logApiCall(endpoint, options);
 
+    const token = localStorage.getItem("authToken");
+
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...options.headers,
       },
       ...options,
@@ -74,6 +77,16 @@ async function apiCall(endpoint, options = {}) {
 
     console.log("API Response Status:", response.status);
     console.log("API Response Headers:", response.headers);
+
+    // Handle unauthorized globally
+    if (response.status === 401) {
+      try { await response.text(); } catch {}
+      localStorage.removeItem("authToken");
+      if (!location.pathname.endsWith("login.html")) {
+        window.location.href = "login.html";
+      }
+      throw new Error("انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى.");
+    }
 
     // Check if response is ok before parsing JSON
     if (!response.ok) {
@@ -1064,26 +1077,28 @@ window.addEventListener("click", (e) => {
 
 // Initialize the application
 document.addEventListener("DOMContentLoaded", async () => {
+  // Simple auth guard: redirect to login if no token
+  const token = localStorage.getItem("authToken");
+  if (!token) {
+    if (!location.pathname.endsWith("login.html")) {
+      window.location.href = "login.html";
+      return;
+    }
+  }
+
   // Test API connection first
   try {
     console.log("Testing API connection...");
     console.log("API Base URL:", API_BASE_URL);
 
-    const testResponse = await fetch(`${API_BASE_URL}/products`);
-    console.log("API connection test result:", testResponse.status);
-    console.log("Response headers:", testResponse.headers);
-
-    if (testResponse.ok) {
+    try {
+      const testData = await apiCall("/products");
+      console.log("API connection test result: ok", Array.isArray(testData?.data) ? testData.data.length : testData);
       console.log("API connection successful");
       showToast("تم الاتصال بالخادم بنجاح", "success");
-    } else {
-      console.warn("API connection issue:", testResponse.status);
-      const errorText = await testResponse.text();
-      console.log("Error response:", errorText);
-      showToast(
-        "تحذير: مشكلة في الاتصال بالخادم - " + testResponse.status,
-        "warning"
-      );
+    } catch (e) {
+      console.warn("API connection issue:", e);
+      showToast("تحذير: مشكلة في الاتصال بالخادم - " + e.message, "warning");
     }
   } catch (error) {
     console.error("API connection failed:", error);
@@ -1271,86 +1286,101 @@ async function processSale() {
   }
 }
 
-
-
 /**
- * دالة لإنشاء وطباعة فاتورة مجمعة
- * @param {Array} cartItems - مصفوفة المنتجات من سلة المشتريات
+ * Creates and prints a consolidated invoice by generating an HTML document
+ * in a new window and linking to an external stylesheet.
+ * @param {Array} cartItems - An array of items from the shopping cart.
  */
 async function printConsolidatedInvoice(cartItems) {
-  // 1. حساب الإجمالي النهائي
+  // 1. Calculate the final total
   const totalAmount = cartItems.reduce((sum, item) => sum + item.total, 0);
 
-  // 2. تنسيق التاريخ والوقت الحالي
+  // 2. Format the current date and time
   const now = new Date();
-  const formattedDate = now.toLocaleDateString('ar-EG', { year: 'numeric', month: '2-digit', day: '2-digit' });
-  const formattedTime = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: false });
+  const formattedDate = now.toLocaleDateString('ar-EG', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+  });
+  const formattedTime = now.toLocaleTimeString('ar-EG', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+  });
 
-  // 3. إنشاء رقم فاتورة بسيط ومميز
+  // 3. Create a simple, unique invoice number
   const invoiceNumber = `INV-${Date.now().toString().slice(-6)}`;
 
-  // 4. بناء صفوف الجدول لكل منتج في السلة
+  // 4. Build the table rows for each item in the cart
   const itemsHtml = cartItems.map(item => `
-    <tr>
-      <td>${item.productName}</td>
-      <td>${(item.weightGrams / 1000).toFixed(3)}</td>
-      <td>${item.total.toFixed(2)}</td>
-    </tr>
+      <tr>
+          <td>${item.productName}</td>
+          <td>${(item.weightGrams / 1000).toFixed(3)}</td>
+          <td>${item.total.toFixed(2)}</td>
+      </tr>
   `).join('');
 
-  // 5. بناء الهيكل الكامل للفاتورة (HTML)
+  // 5. Build the complete HTML structure for the invoice
   const invoiceHtml = `
-    <!DOCTYPE html>
-    <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <title>فاتورة ${invoiceNumber}</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
-
-    </head>
-    <body>
-      <div class="invoice-receipt">
-        <div class="invoice-header">
-          <p><strong>رقم الفاتورة:</strong> ${invoiceNumber}</p>
-          <p><strong>التاريخ:</strong> ${formattedDate} &nbsp; <strong>الوقت:</strong> ${formattedTime}</p>
-        </div>
-        <table class="invoice-table">
-          <thead>
-            <tr>
-              <th>نوع المنتج</th>
-              <th>الوزن</th>
-              <th>السعر</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${itemsHtml}
-          </tbody>
-        </table>
-        <div class="invoice-total">
-          <p><strong>الاجمالي</strong></p>
-          <p><strong>${totalAmount.toFixed(2)}</strong></p>
-        </div>
-        <div class="invoice-footer">
-          <p><strong>السجل الضريبي:</strong> 508079700</p>
-          <p><strong>رقم الهاتف:</strong> 01204383773</p>
-          <p><strong>العنوان:</strong> ابن الفارض بجوار مخبز الطيب</p>
-        </div>
-      </div>
-    </body>
-    </html>
+      <!DOCTYPE html>
+      <html lang="ar" dir="rtl">
+      <head>
+          <meta charset="UTF-8">
+          <title>فاتورة ${invoiceNumber}</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+          <!-- This line is the important change. It links to your new CSS file. -->
+          <link rel="stylesheet" href="invoice.css">
+      </head>
+      <body>
+          <div class="invoice-receipt">
+              <div class="invoice-header">
+                  <p><strong>رقم الفاتورة:</strong> ${invoiceNumber}</p>
+                  <p><strong>التاريخ:</strong> ${formattedDate} &nbsp; <strong>الوقت:</strong> ${formattedTime}</p>
+              </div>
+              <table class="invoice-table">
+                  <thead>
+                      <tr>
+                          <th>نوع المنتج</th>
+                          <th>الوزن (كجم)</th>
+                          <th>السعر (جنيه)</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      ${itemsHtml}
+                  </tbody>
+              </table>
+              <div class="invoice-total">
+                  <p><strong>الاجمالي</strong></p>
+                  <p><strong>${totalAmount.toFixed(2)}</strong></p>
+              </div>
+              <div class="invoice-footer">
+                  <p><strong>السجل الضريبي:</strong> 508079700</p>
+                  <p><strong>رقم الهاتف:</strong> 01204383773</p>
+                  <p><strong>العنوان:</strong> ابن الفارض بجوار مخبز الطيب</p>
+              </div>
+          </div>
+      </body>
+      </html>
   `;
 
-  // 6. فتح نافذة جديدة، كتابة كود الفاتورة بداخلها، ثم طباعتها
+  // 6. Open a new window, write the invoice HTML, and print it
   const printWindow = window.open('', '_blank');
   printWindow.document.write(invoiceHtml);
   printWindow.document.close();
-  
-  // ننتظر لحظة للتأكد من تحميل كل شيء (خاصة الـ CSS والصورة) قبل الطباعة
-  setTimeout(() => {
-    printWindow.print();
-    printWindow.close();
-  }, 500);
+
+  // Print after the page loads to ensure CSS and fonts are applied
+  printWindow.onload = () => {
+      setTimeout(() => { // Add a slight delay to ensure everything renders
+          try {
+              printWindow.focus();
+          } catch (e) {
+              console.error("Could not focus on print window:", e);
+          }
+          printWindow.print();
+          printWindow.close();
+      }, 250);
+  };
 }
+

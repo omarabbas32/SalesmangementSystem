@@ -1,0 +1,123 @@
+/* Resetting default margin and padding */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    /* This forces the browser to print background images and colors */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    font-family: "Readex Pro", sans-serif;
+    color: #000;
+}
+
+/* Watermark Style */
+body::after {
+    content: '';
+    /* Ensure you have bill.png in the img folder */
+    background-image: url('img/bill.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.invoice-receipt {
+    display: block !important;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    box-sizing: border-box;
+}
+
+.invoice-header,
+.invoice-total,
+.invoice-footer {
+    text-align: center;
+    border-bottom: 2px dashed #000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.invoice-footer {
+    border-bottom: none;
+    border-top: 2px dashed #000;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+p {
+    margin: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.invoice-table th,
+.invoice-table td {
+    text-align: center;
+    padding: 8px 2px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Border for table header */
+.invoice-table thead th {
+    border-top: 2px dashed #000;
+    border-bottom: 2px dashed #000;
+}
+
+/* Dashed border for table rows */
+.invoice-table tbody td {
+    border-bottom: 1px dashed #555;
+}
+
+/* Remove border from the last row */
+.invoice-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.invoice-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+}
+
+/* Styles specifically for printing */
+@media print {
+
+    html,
+    body {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .invoice-receipt {
+        margin: 0;
+        padding: 10px;
+        border: none;
+    }
+}

@@ -1467,8 +1467,9 @@ button.btn-btn-primary:hover{
         margin: 0 !important;
         padding: 0 !important;
     }
-
+    
     .invoice-receipt {
+
         display: block !important;
         position: absolute;
         top: 0;
@@ -1478,7 +1479,6 @@ button.btn-btn-primary:hover{
         padding: 0;
         box-shadow: none !important;
         border: none !important;
-        background-image: none !important; /* إخفاء العلامة المائية عند الطباعة الفعلية للوضوح */
     }
 }
 

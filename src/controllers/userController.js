@@ -21,9 +21,11 @@ const writeUsers = (users) => {
 
 // Helper function to generate JWT
 const generateToken = (id, role) => {
-     console.log('SECRET USED FOR SIGNING:', process.env.JWT_SECRET); // <-- Add this
-    return jwt.sign({ id, role }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
+    const secret = process.env.JWT_SECRET || 'dev_secret_change_me';
+    const expiresIn = process.env.JWT_EXPIRES_IN || '7d';
+    console.log('SECRET USED FOR SIGNING present?:', !!process.env.JWT_SECRET);
+    return jwt.sign({ id, role }, secret, {
+        expiresIn,
     });
 };
 

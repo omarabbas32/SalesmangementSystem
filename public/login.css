@@ -1,0 +1,99 @@
+/* login.css */
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+.login-box {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-logo {
+    margin-bottom: 1.5rem;
+}
+
+.login-box h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.login-box .form-group {
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+
+.login-box .form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-box .form-actions {
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.login-box .btn {
+    width: 100%;
+}
+
+.login-error-message {
+    color: #e74c3c;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    display: none; /* Hidden by default */
+    font-size: 0.9rem;
+}
+
+/* Re-using some styles from style.css for consistency */
+.loading-spinner {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #000000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 600;
+}

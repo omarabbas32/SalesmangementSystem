@@ -11,17 +11,33 @@
   {
     "name": "رجالي",
     "price_per_kg": 1500.5,
-    "current_stock_grams": 4700,
+    "current_stock_grams": 4000,
     "id": 2,
     "createdAt": "2025-10-10T18:47:34.183Z",
-    "updatedAt": "2025-10-15T11:21:23.004Z"
+    "updatedAt": "2025-10-15T17:06:16.579Z"
   },
   {
     "name": "منتج جديد",
     "price_per_kg": 10000000,
-    "current_stock_grams": 498907,
+    "current_stock_grams": 498887,
     "id": 3,
     "createdAt": "2025-10-12T14:00:19.413Z",
-    "updatedAt": "2025-10-15T11:21:23.016Z"
+    "updatedAt": "2025-10-15T16:47:49.215Z"
+  },
+  {
+    "name": "جاكيت رجالي",
+    "price_per_kg": 10000,
+    "current_stock_grams": 99450,
+    "id": 4,
+    "createdAt": "2025-10-15T18:50:18.295Z",
+    "updatedAt": "2025-10-15T19:08:07.075Z"
+  },
+  {
+    "name": "كنزه حريمي",
+    "price_per_kg": 1500,
+    "current_stock_grams": 499000,
+    "id": 5,
+    "createdAt": "2025-10-15T18:50:51.205Z",
+    "updatedAt": "2025-10-15T18:52:47.222Z"
   }
 ]

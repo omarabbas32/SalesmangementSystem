@@ -5,7 +5,7 @@ const { protect, authorize } = require('../middleware/authMiddleware');
 
 
 // إضافة منتج جديد
-router.post('/', authorize('Admin','User'), ProductController.addProduct);
+router.post('/', protect, authorize('Admin','User'), ProductController.addProduct);
 
 // الحصول على جميع المنتجات
 router.get('/', protect, authorize('Admin','User'), ProductController.getAllProducts);
