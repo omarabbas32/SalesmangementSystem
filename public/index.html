@@ -15,12 +15,7 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1><i class="fas fa-store"></i> نظام إدارة المبيعات</h1>
-                <div class="header-actions">
-                    <button class="btn-btn-primary" onclick="showBackupStatus()">
-                        <i class="fas fa-database"></i> حالة النسخ الاحتياطي
-                    </button>
-                </div>
+                <img src="img/brandat.png" alt="" width="100px">
             </div>
         </header>
 
@@ -30,7 +25,7 @@
                 <i class="fas fa-tachometer-alt"></i> لوحة التحكم
             </button>
             <button class="nav-tab" onclick="showSection('products')">
-                <i class="fas fa-box"></i> المنتجات
+                <i class="fas fa-box"></i> الأصناف
             </button>
             <button class="nav-tab" onclick="showSection('sales')">
                 <i class="fas fa-shopping-cart"></i> المبيعات
@@ -60,7 +55,7 @@
                         </div>
                         <div class="card-content">
                             <h3 id="total-products">0</h3>
-                            <p>إجمالي المنتجات</p>
+                            <p>إجمالي الأصناف</p>
                         </div>
                     </div>
                     <div class="dashboard-card">
@@ -87,13 +82,13 @@
                         </div>
                         <div class="card-content">
                             <h3 id="today-profit">0 جنيه مصري</h3>
-                            <p>الربح اليومي</p>
+                            <p>الربح الصافي اليومي</p>
                         </div>
                     </div>
                 </div>
                 <div class="dashboard-charts">
                     <div class="chart-container">
-                        <h3>المنتجات منخفضة المخزون</h3>
+                        <h3>الأصناف المنخفضة</h3>
                         <div id="low-stock-list" class="low-stock-list"></div>
                     </div>
                 </div>
@@ -102,7 +97,7 @@
             <!-- Products Section -->
             <section id="products" class="content-section">
                 <div class="section-header">
-                    <h2><i class="fas fa-box"></i> إدارة المنتجات</h2>
+                    <h2><i class="fas fa-box"></i> إدارة الأصناف</h2>
                     <button class="btn btn-primary" onclick="showAddProductModal()">
                         <i class="fas fa-plus"></i> إضافة منتج
                     </button>
@@ -207,41 +202,56 @@
         </div>
     </div>
 
-    <!-- Add Sale Modal -->
-    <div id="add-sale-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>بيع جديد</h3>
-                <span class="close" onclick="closeModal('add-sale-modal')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="add-sale-form">
+
+    
+   <div id="add-sale-modal" class="modal">
+    <div class="modal-content large-modal">
+        <div class="modal-header">
+            <h3>بيع جديد</h3>
+            <span class="close" onclick="closeModal('add-sale-modal')">&times;</span>
+        </div>
+        <div class="modal-body" style="display: flex; flex-direction: column; overflow: hidden;">
+            <div class="add-product-section">
+                <h4><i class="fas fa-plus-circle"></i> إضافة منتج للسلة</h4>
+                <div class="form-row">
                     <div class="form-group">
                         <label for="sale-product">المنتج:</label>
-                        <select id="sale-product" class="form-input" required>
+                        <select id="sale-product" class="form-input">
                             <option value="">اختر المنتج</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="flex: 0.5;">
                         <label for="sale-weight">الوزن (جرام):</label>
-                        <input type="number" id="sale-weight" class="form-input" step="0.1" required>
+                        <input type="number" id="sale-weight" class="form-input" step="0.1">
                     </div>
-                    <div class="form-group">
-                        <label>السعر لكل كيلو:</label>
-                        <input type="text" id="sale-price-per-kg" class="form-input" readonly>
+                    <button type="button" class="btn btn-success" onclick="addToCart()">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
+                </div>
+            </div>
+
+            <div class="shopping-cart-section">
+                <h4><i class="fas fa-shopping-cart"></i> سلة المشتريات</h4>
+                <div class="cart-items" id="cart-items">
+                    <p class="empty-cart">السلة فارغة حاليًا</p>
+                </div>
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>الإجمالي:</span>
+                        <span id="cart-total-amount">0.00 جنيه مصري</span>
                     </div>
-                    <div class="form-group">
-                        <label>المبلغ الإجمالي:</label>
-                        <input type="text" id="sale-total" class="form-input" readonly>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">تسجيل البيع</button>
-                        <button type="button" class="btn btn-secondary" onclick="closeModal('add-sale-modal')">إلغاء</button>
-                    </div>
-                </form>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="process-sale-btn" class="btn btn-primary" onclick="processSale()" disabled>
+                    <i class="fas fa-check"></i> إتمام عملية البيع
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('add-sale-modal')">إلغاء</button>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Add Expense Modal -->
     <div id="add-expense-modal" class="modal">
