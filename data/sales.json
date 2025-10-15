@@ -46,5 +46,35 @@
     "id": 5,
     "createdAt": "2025-10-13T19:45:22.438Z",
     "updatedAt": "2025-10-13T19:45:22.438Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "price_per_kg": 1500.5,
+    "total_amount": 150.05,
+    "sale_date": "2025-10-15T11:20:31.251Z",
+    "id": 6,
+    "createdAt": "2025-10-15T11:20:31.252Z",
+    "updatedAt": "2025-10-15T11:20:31.252Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "price_per_kg": 1500.5,
+    "total_amount": 150.05,
+    "sale_date": "2025-10-15T11:21:23.002Z",
+    "id": 7,
+    "createdAt": "2025-10-15T11:21:23.002Z",
+    "updatedAt": "2025-10-15T11:21:23.002Z"
+  },
+  {
+    "product_id": 3,
+    "weight_grams": 1000,
+    "price_per_kg": 10000000,
+    "total_amount": 10000000,
+    "sale_date": "2025-10-15T11:21:23.012Z",
+    "id": 8,
+    "createdAt": "2025-10-15T11:21:23.013Z",
+    "updatedAt": "2025-10-15T11:21:23.013Z"
   }
 ]

@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
-
+// Import our authentication middleware
+const { protect, authorize } = require('../middleware/authMiddleware');
 class ProductController {
   // إضافة منتج جديد
   static async addProduct(req, res) {

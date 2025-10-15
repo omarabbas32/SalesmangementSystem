@@ -1,5 +1,5 @@
-const API_BASE_URL =
-  "https://salesmangementsystem-production.up.railway.app/api";
+// API Configuration ---productiooooooooooooooooooooooooon 
+const API_BASE_URL = 'http://localhost:3000/api'; // غيّر هذا إلى عنوان الخادم الخاص بك
 
 // Debug function to log API calls
 function logApiCall(endpoint, options = {}) {
@@ -1308,6 +1308,8 @@ async function printConsolidatedInvoice(cartItems) {
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+
     </head>
     <body>
       <div class="invoice-receipt">

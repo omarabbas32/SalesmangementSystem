@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "local_1760533149568",
+    "username": "omar",
+    "password": "$2b$10$63GFphrX3X8rmijWM6mAD.hzmqii58OejuCxAbiW8GnwyPPM6YYEC",
+    "role": "Admin",
+    "createdAt": "2025-10-15T12:59:09.568Z"
+  },
+  {
+    "_id": "local_1760534085874",
+    "username": "omar1",
+    "password": "$2b$10$AvQ0RuI7CNKRPjwSYep7QO1f0G5LhiycCb5esxBTS/lpeXZ4hXKFq",
+    "role": "Admin",
+    "createdAt": "2025-10-15T13:14:45.874Z"
+  }
+]

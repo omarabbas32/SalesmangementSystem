@@ -1,30 +1,30 @@
 const express = require('express');
 const router = express.Router();
 const SaleController = require('../controllers/saleController');
-
+const { protect, authorize } = require('../middleware/authMiddleware');
 // إضافة عملية بيع جديدة
-router.post('/', SaleController.addSale);
+router.post('/', protect, authorize('Admin','User'), SaleController.addSale);
 
 // الحصول على جميع المبيعات
-router.get('/', SaleController.getAllSales);
+router.get('/', protect, authorize('Admin','User'), SaleController.getAllSales);
 
 // الحصول على مبيعات اليوم
-router.get('/today', SaleController.getTodaySales);
+router.get('/today', protect, authorize('Admin','User'), SaleController.getTodaySales);
 
 // الحصول على مبيعات تاريخ معين
-router.get('/date/:date', SaleController.getSalesByDate);
+router.get('/date/:date', protect, authorize('Admin','User'), SaleController.getSalesByDate);
 
 // الحصول على تفاصيل فاتورة معينة
-router.get('/:id', SaleController.getSaleById);
+router.get('/:id', protect, authorize('Admin','User'), SaleController.getSaleById);
 
 // إلغاء عملية بيع
-router.delete('/:id', SaleController.cancelSale);
+router.delete('/:id', protect, authorize('Admin','User'), SaleController.cancelSale);
 
 // طباعة فاتورة
-router.get('/:id/invoice', SaleController.printInvoice);
+router.get('/:id/invoice', protect, authorize('Admin','User'), SaleController.printInvoice);
 
 // الحصول على إجمالي المبيعات لفترة معينة
-router.get('/total/range', SaleController.getSalesTotal);
+router.get('/total/range', protect, authorize('Admin','User'), SaleController.getSalesTotal);
 
 module.exports = router;
 

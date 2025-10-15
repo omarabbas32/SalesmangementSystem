@@ -68,5 +68,41 @@
     "id": 8,
     "createdAt": "2025-10-13T19:45:22.453Z",
     "updatedAt": "2025-10-13T19:45:22.453Z"
+  },
+  {
+    "product_id": 3,
+    "weight_grams": 7,
+    "adjustment_type": "add",
+    "reason": "إضافة مخزون",
+    "id": 9,
+    "createdAt": "2025-10-14T18:34:10.834Z",
+    "updatedAt": "2025-10-14T18:34:10.834Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "adjustment_type": "remove",
+    "reason": "بيع - فاتورة رقم 6",
+    "id": 10,
+    "createdAt": "2025-10-15T11:20:31.258Z",
+    "updatedAt": "2025-10-15T11:20:31.258Z"
+  },
+  {
+    "product_id": 2,
+    "weight_grams": 100,
+    "adjustment_type": "remove",
+    "reason": "بيع - فاتورة رقم 7",
+    "id": 11,
+    "createdAt": "2025-10-15T11:21:23.006Z",
+    "updatedAt": "2025-10-15T11:21:23.006Z"
+  },
+  {
+    "product_id": 3,
+    "weight_grams": 1000,
+    "adjustment_type": "remove",
+    "reason": "بيع - فاتورة رقم 8",
+    "id": 12,
+    "createdAt": "2025-10-15T11:21:23.019Z",
+    "updatedAt": "2025-10-15T11:21:23.019Z"
   }
 ]
